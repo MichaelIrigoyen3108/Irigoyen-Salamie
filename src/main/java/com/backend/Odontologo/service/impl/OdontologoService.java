@@ -1,11 +1,12 @@
-package com.backend.Odontologo.service;
+package com.backend.Odontologo.service.impl;
 import com.backend.Odontologo.dao.IDao;
 import com.backend.Odontologo.dao.implement.OdontologoDaoH2;
 import com.backend.Odontologo.entity.Odontologo;
+import com.backend.Odontologo.service.IOdontologoService;
 
 import java.util.List;
 
-public class OdontologoService {
+public class OdontologoService extends IOdontologoService {
     private IDao<Odontologo> odontologoIDao;
 
     public OdontologoService(IDao<Odontologo> odontologoIDao){
