@@ -4,7 +4,7 @@ import com.backend.Odontologo.entity.Odontologo;
 
 import java.util.List;
 
-public class IOdontologoService {
+public interface IOdontologoService {
     Odontologo registrarOdontologo(Odontologo odontologo);
 
     List<Odontologo> listarTodos();

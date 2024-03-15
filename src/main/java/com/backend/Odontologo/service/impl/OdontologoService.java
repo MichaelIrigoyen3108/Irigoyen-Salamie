@@ -1,22 +1,47 @@
+
 package com.backend.Odontologo.service.impl;
-import com.backend.Odontologo.dao.IDao;
-import com.backend.Odontologo.dao.implement.OdontologoDaoH2;
+
+
 import com.backend.Odontologo.entity.Odontologo;
+import com.backend.Odontologo.repository.OdontologoRepository;
+import com.backend.Odontologo.repository.PacienteRepository;
 import com.backend.Odontologo.service.IOdontologoService;
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+e
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class OdontologoService extends IOdontologoService {
-    private IDao<Odontologo> odontologoIDao;
+public class OdontologoService implements IOdontologoService {
+    private final Logger LOGGER = LoggerFactory.getLogger(OdontologoService.class);
+    private OdontologoRepository odontologoRepository;
 
-    public OdontologoService(IDao<Odontologo> odontologoIDao){
-        this.odontologoIDao = odontologoIDao;
+
+    private ModelMapper modelMapper;
+
+    public OdontologoService(OdontologoRepository odontologoRepository, ModelMapper modelMapper) {
+        this.odontologoRepository = odontologoRepository;
+        this.modelMapper = modelMapper;
     }
-    public Odontologo registrar(Odontologo odontologo){
-        return odontologoIDao.registrar(odontologo);
+
+    public Odontologo registrarOdontologo(Odontologo odontologo) {
+        return odontologoRepository.save(odontologo);
     }
-    public List<Odontologo> listarTodos(){
-        return odontologoIDao.listarTodos();
+
+    @Override
+    public List<Odontologo> listarTodos() {
+        return null;
     }
+
+    @Override
+    public Odontologo buscarPorId(int id) {
+        return null;
+    }
+
+
 
 }
+
+
+

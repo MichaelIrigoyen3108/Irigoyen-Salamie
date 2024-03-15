@@ -1,12 +1,21 @@
 package com.backend.Odontologo.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ODONTOLOGOS")
 public class Odontologo {
-    private int id;
+    @Id
+    @GeneratedValue(strategy =)
+    private Long id;
     private Integer matricula;
     private String nombre;
     private String apellido;
 
-    public Odontologo(Integer matricula, String nombre, String apellido, int id) {
+    public Odontologo(Integer matricula, String nombre, String apellido, Long id) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,11 +55,11 @@ public class Odontologo {
         this.apellido = apellido;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
