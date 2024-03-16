@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class OdontologoApplication {
+
 	private static Logger LOGGER = LoggerFactory.getLogger(OdontologoApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(OdontologoApplication.class, args);
 	}

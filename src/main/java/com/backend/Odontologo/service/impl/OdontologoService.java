@@ -15,10 +15,12 @@ import com.backend.Odontologo.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public abstract class OdontologoService implements IOdontologoService {
+@Service
+public class OdontologoService implements IOdontologoService {
     private final Logger LOGGER = LoggerFactory.getLogger(OdontologoService.class);
     private OdontologoRepository odontologoRepository;
     private ModelMapper modelMapper;
