@@ -1,19 +1,20 @@
 package com.backend.Odontologo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ODONTOLOGOS")
 public class Odontologo {
     @Id
-    @GeneratedValue(strategy =)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 50)
     private Integer matricula;
+    @Column(length = 50)
     private String nombre;
+    @Column(length = 50)
     private String apellido;
+
 
     public Odontologo(Integer matricula, String nombre, String apellido, Long id) {
         this.matricula = matricula;
