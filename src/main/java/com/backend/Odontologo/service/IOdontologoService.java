@@ -1,13 +1,17 @@
 package com.backend.Odontologo.service;
 
+import com.backend.Odontologo.dto.entrada.OdontologoEntradaDto;
+import com.backend.Odontologo.dto.salida.OdontologoSalidaDto;
 import com.backend.Odontologo.entity.Odontologo;
 
 import java.util.List;
 
 public interface IOdontologoService {
-    Odontologo registrarOdontologo(Odontologo odontologo);
+    OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo);
 
-    List<Odontologo> listarTodos();
+    List<OdontologoSalidaDto> listarOdontologo();
 
-    Odontologo buscarPorId(int id);
+    OdontologoSalidaDto buscarOdontologoPorId(Long id);
+
+
 }

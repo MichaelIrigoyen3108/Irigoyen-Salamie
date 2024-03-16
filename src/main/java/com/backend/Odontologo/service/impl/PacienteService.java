@@ -9,8 +9,10 @@ import com.backend.Odontologo.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class PacienteService implements IPacienteService {
     private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
     private PacienteRepository pacienteRepository;
