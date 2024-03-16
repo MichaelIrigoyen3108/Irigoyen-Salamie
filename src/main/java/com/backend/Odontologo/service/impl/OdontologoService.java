@@ -40,29 +40,29 @@ public abstract class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public List<PacienteSalidaDto> listarPacientes() {
-        List<PacienteSalidaDto> pacientesSalidaDto =  pacienteRepository.findAll()
+    public List<OdontologoSalidaDto> listarOdontologo() {
+        List<OdontologoSalidaDto> odontologosSalidaDto =  odontologoRepository.findAll()
                 .stream()
-                .map(paciente -> modelMapper.map(paciente, PacienteSalidaDto.class))
+                .map(odontologo -> modelMapper.map(odontologo, OdontologoSalidaDto.class))
                 .toList();
 
-        LOGGER.info("Listado de todos los pacientes: {}", JsonPrinter.toString(pacientesSalidaDto));
-        return pacientesSalidaDto;
+        LOGGER.info("Listado de todos los odontologos: {}", JsonPrinter.toString(odontologosSalidaDto));
+        return odontologosSalidaDto;
     }
 
     @Override
-    public PacienteSalidaDto buscarPacientePorId(Long id) {
-        Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);
-        PacienteSalidaDto pacienteEncontrado = null;
+    public OdontologoSalidaDto buscarOdontologoPorId(Long id) {
+        Odontologo odontologoBuscado = odontologoRepository.findById(id).orElse(null);
+        OdontologoSalidaDto odontologoEncontrado = null;
 
-        if(pacienteBuscado != null){
-            pacienteEncontrado = modelMapper.map(pacienteBuscado, PacienteSalidaDto.class);
-            LOGGER.info("Paciente encontrado: {}", JsonPrinter.toString(pacienteEncontrado));
+        if(odontologoBuscado != null){
+            odontologoEncontrado = modelMapper.map(odontologoBuscado, OdontologoSalidaDto.class);
+            LOGGER.info("Odontologo encontrado: {}", JsonPrinter.toString(odontologoEncontrado));
         } else {
             LOGGER.error("El id no se encuentra registrado en la base de datos");
         }
 
-        return pacienteEncontrado;
+        return odontologoEncontrado;
     }
 
     private void configureMapping(){
