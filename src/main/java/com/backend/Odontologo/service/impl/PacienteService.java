@@ -13,33 +13,21 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 
 public class PacienteService implements IPacienteService {
-
-
     private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
-
-
     private PacienteRepository pacienteRepository;
-
     private ModelMapper modelMapper;
-
 
     public PacienteService(PacienteRepository pacienteRepository, ModelMapper modelMapper) {
         this.pacienteRepository = pacienteRepository;
         this.modelMapper = modelMapper;
         configureMapping();
     }
-
     @Override
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) {
-        //Logueamos lo que recibimos
         LOGGER.info("PacienteEntradaDto: {}", JsonPrinter.toString(paciente));
-        //convertimos mediante el mapper de dtoEntrada a entidad
         Paciente pacienteEntidad = modelMapper.map(paciente, Paciente.class);
-        //mandamos a persistir a la capa dao y obtenemos una entidad con ID
         Paciente pacienteEntidaConId = pacienteRepository.save(pacienteEntidad);
-        //transformamos la entidad obtenida en salidaDto
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteEntidaConId, PacienteSalidaDto.class);
-        //Logueamos lo que sale
         LOGGER.info("PacienteSalidaDto: {}",  JsonPrinter.toString(pacienteSalidaDto));
         return pacienteSalidaDto;
     }
@@ -52,12 +40,6 @@ public class PacienteService implements IPacienteService {
                 .map(paciente -> modelMapper.map(paciente, PacienteSalidaDto.class))
                 .toList();
 
-        //List<Paciente> pacientes = pacienteIDao.listarTodos();
-        //List<PacienteSalidaDto> pacientesSalidaDto = new ArrayList<>();
-        //for (Paciente paciente : pacientes){
-        //    PacienteSalidaDto pacienteSalida = modelMapper.map(paciente, PacienteSalidaDto.class);
-        //    pacientesSalidaDto.add(pacienteSalida);
-        //}
 
         LOGGER.info("Listado de todos los pacientes: {}", JsonPrinter.toString(pacientesSalidaDto));
         return pacientesSalidaDto;
@@ -67,7 +49,6 @@ public class PacienteService implements IPacienteService {
     public PacienteSalidaDto buscarPacientePorId(int id) {
         return null;
     }
-
     @Override
     public PacienteSalidaDto buscarPacientePorId(Long id) {
 
@@ -80,15 +61,11 @@ public class PacienteService implements IPacienteService {
 
         } else LOGGER.error("El id no se encuentra registrado en la base de datos");
 
-
         return pacienteEncontrado;
     }
-
-
     private void configureMapping(){
         modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
                 .addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));
-
 
         modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)
                 .addMappings(mapper -> mapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));

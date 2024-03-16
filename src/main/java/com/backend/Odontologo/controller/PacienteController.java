@@ -2,6 +2,7 @@ package com.backend.Odontologo.controller;
 
 import com.backend.Odontologo.dto.entrada.PacienteEntradaDto;
 import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
+import com.backend.Odontologo.service.IPacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,15 +39,14 @@ public class PacienteController {
 
 
     //PUT
-    @PutMapping("/actualizar/{id}")//localhost:8080/pacientes/actualizar/x
+    @PutMapping("/actualizar/{id}")
     public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
-        return null; //pacienteService.actualizar(paciente);
+        return null;
     }
 
     //DELETE
-    @DeleteMapping("/eliminar")//localhost:8080/pacientes/eliminar?id=x
+    @DeleteMapping("/eliminar")
     public ResponseEntity<?> eliminarPaciente(@RequestParam int id){
-        //pacienteService.eliminarPaciente(id);
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
     }
 

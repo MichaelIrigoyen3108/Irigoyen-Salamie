@@ -12,5 +12,6 @@ public interface IPacienteService {
 
     PacienteSalidaDto buscarPacientePorId(int id);
 
+
     PacienteSalidaDto buscarPacientePorId(Long id);
 }
