@@ -6,7 +6,6 @@ import com.backend.Odontologo.dto.salida.OdontologoSalidaDto;
 import com.backend.Odontologo.service.IOdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
