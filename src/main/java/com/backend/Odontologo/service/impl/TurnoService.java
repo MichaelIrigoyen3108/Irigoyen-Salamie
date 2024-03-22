@@ -6,14 +6,16 @@ import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
 import com.backend.Odontologo.dto.salida.TurnoSalidaDto;
 import com.backend.Odontologo.entity.Turno;
 import com.backend.Odontologo.exceptions.BadRequestException;
+import com.backend.Odontologo.exceptions.ResourceNotFoundException;
 import com.backend.Odontologo.repository.TurnoRepository;
 import com.backend.Odontologo.service.ITurnoService;
+import com.backend.Odontologo.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TurnoService implements ITurnoService {
@@ -52,7 +54,6 @@ public class TurnoService implements ITurnoService {
                 LOGGER.error(odontologoNoEnBdd);
                 throw new BadRequestException(odontologoNoEnBdd);
             }
-
         } else {
             Turno turnoNuevo = turnoRepository.save(modelMapper.map(turnoEntradaDto, Turno.class));
             turnoSalidaDto = entidadADtoSalida(turnoNuevo, paciente, odontologo);
@@ -65,23 +66,37 @@ public class TurnoService implements ITurnoService {
 
     @Override
     public List<TurnoSalidaDto> listarTurnos() {
-        return null;
+        List<TurnoSalidaDto> turnoSalidaDtos =  turnoRepository.findAll()
+                .stream()
+                .map(turno -> modelMapper.map(turno, TurnoSalidaDto.class))
+                .toList();
+
+        LOGGER.info("Listado de todos los turnos: {}", JsonPrinter.toString(turnoSalidaDtos));
+        return turnoSalidaDtos;
     }
 
     @Override
     public TurnoSalidaDto buscarTurnoPorId(Long id) {
-        return null;
+        Turno turnoBuscado = turnoRepository.findById(id).orElse(null);
+        TurnoSalidaDto turnoEncontrado = null;
+
+        if(turnoBuscado != null){
+            turnoEncontrado = modelMapper.map(turnoBuscado, TurnoSalidaDto.class);
+            LOGGER.info("Turno encontrado: {}", JsonPrinter.toString(turnoEncontrado));
+        } else {
+            LOGGER.error("El id no se encuentra registrado en la base de datos");
+        }
+
+        return turnoEncontrado;
     }
 
     @Override
     public void eliminarTurno(Long id) {
-
+        turnoRepository.deleteById(id);
     }
 
-    @Override
-    public TurnoSalidaDto modificarTurno(TurnoEntradaDto turnoEntradaDto, Long id) {
-        return null;
-    }
+  //metodo para modificar turno
+
 
     private TurnoSalidaDto entidadADtoSalida(Turno turno, PacienteSalidaDto pacienteSalidaDto, OdontologoSalidaDto odontologoSalidaDto){
         TurnoSalidaDto turnoSalidaDto = modelMapper.map(turno, TurnoSalidaDto.class);

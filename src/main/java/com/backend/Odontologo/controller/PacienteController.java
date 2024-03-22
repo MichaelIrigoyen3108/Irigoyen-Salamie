@@ -2,6 +2,7 @@ package com.backend.Odontologo.controller;
 
 import com.backend.Odontologo.dto.entrada.PacienteEntradaDto;
 import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
+import com.backend.Odontologo.exceptions.ResourceNotFoundException;
 import com.backend.Odontologo.service.IPacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,14 +39,15 @@ public class PacienteController {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente)
-    {
-        return null;
-    }
+   // @PutMapping("/actualizar/{id}")
+    //public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente)
+    //{
+     //   return new ResponseEntity<>(pacienteService.)
+    //}
 
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminarPaciente(@RequestParam Long id){
+    public ResponseEntity<?> eliminarPaciente(@RequestParam Long id) throws ResourceNotFoundException {
+        pacienteService.eliminarPaciente(id);
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
     }
 

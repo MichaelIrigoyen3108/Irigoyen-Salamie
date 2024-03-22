@@ -29,26 +29,28 @@ public class OdontologoController {
     {
         return new ResponseEntity<>(odontologoService.listarOdontologo(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorId(@PathVariable Long id)
     {
         return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
     }
-
     @PostMapping("/registrar")
     public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo)
     {
         return new ResponseEntity<>(odontologoService.registrarOdontologo(odontologo), HttpStatus.CREATED);
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<OdontologoSalidaDto> actualizarOdontologo(@RequestBody @Valid PacienteEntradaDto odontologo)
-    {
-        return null;
-    }
+   // @PutMapping("/actualizar/{id}")
+    //public ResponseEntity<OdontologoSalidaDto> actualizarOdontologo(@RequestBody @Valid PacienteEntradaDto odontologo)
+    //{
+     //   return null;
+    //}
 
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminarOdontologo(@RequestParam Long id){
-        return new ResponseEntity<>("Odontologo eliminado correctamente", HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> eliminarOdontologo(@RequestParam Long id) {
+        return new ResponseEntity<>("Odontólogo eliminado correctamente", HttpStatus.NO_CONTENT);
     }
+
+
 }

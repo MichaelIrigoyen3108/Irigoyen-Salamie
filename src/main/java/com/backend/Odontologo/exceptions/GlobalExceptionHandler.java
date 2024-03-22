@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
         mensaje.put("mensaje", "Recurso no encontrado: " + resourceNotFoundException.getMessage());
         return mensaje;
     }
-
+//tenemos que programar el manejo global de la badRequest
 
 
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PacienteService implements IPacienteService {
+public class  PacienteService implements IPacienteService {
     private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
     private PacienteRepository pacienteRepository;
     private ModelMapper modelMapper;
@@ -58,6 +58,10 @@ public class PacienteService implements IPacienteService {
         }
 
         return pacienteEncontrado;
+    }
+    @Override
+    public void eliminarPaciente(Long id) {
+        pacienteRepository.deleteById(id);
     }
 
     private void configureMapping(){

@@ -66,6 +66,10 @@ public class OdontologoService implements IOdontologoService {
 
         return odontologoEncontrado;
     }
+    @Override
+    public void eliminarOdontologoPorId(Long id) {
+        odontologoRepository.deleteById(id);
+    }
 
     private void configureMapping(){
         modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)

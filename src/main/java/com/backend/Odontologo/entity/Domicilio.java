@@ -5,7 +5,7 @@ import javax.persistence.*;
 public class Domicilio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 50)
@@ -18,6 +18,9 @@ public class Domicilio {
 
     @Column(length = 50)
     private String provincia;
+
+    public Domicilio() {
+    }
 
     public Domicilio(Long id, String calle, int numero, String localidad, String provincia) {
         this.id = id;
