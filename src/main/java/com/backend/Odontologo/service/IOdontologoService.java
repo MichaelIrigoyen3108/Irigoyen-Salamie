@@ -13,7 +13,8 @@ public interface IOdontologoService {
 
     OdontologoSalidaDto buscarOdontologoPorId(Long id);
 
-    void eliminarOdontologoPorId(Long id);
+    OdontologoSalidaDto actualizarOdontologoPorId(OdontologoEntradaDto odontologo, Long id);
 
+    void eliminarOdontologoPorId(Long id);
 
 }

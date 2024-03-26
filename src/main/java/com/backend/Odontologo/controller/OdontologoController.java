@@ -24,31 +24,30 @@ public class OdontologoController {
         this.odontologoService = odontologoService;
     }
 
+    @PostMapping("/registrar")
+    public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo)
+    {
+        return new ResponseEntity<>(odontologoService.registrarOdontologo(odontologo), HttpStatus.CREATED);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorId(@PathVariable Long id)
+    {
+        return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
+    }
     @GetMapping()
     public ResponseEntity<List<OdontologoSalidaDto>> listarOdontologo()
     {
         return new ResponseEntity<>(odontologoService.listarOdontologo(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorId(@PathVariable Long id)
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<OdontologoSalidaDto> actualizarOdontologoPorId(@RequestBody @Valid OdontologoEntradaDto odontologoDto, @PathVariable Long id)
     {
-        return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
+        return new ResponseEntity<>(odontologoService.actualizarOdontologoPorId(odontologoDto, id), HttpStatus.OK);
     }
-    @PostMapping("/registrar")
-    public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo)
-    {
-        return new ResponseEntity<>(odontologoService.registrarOdontologo(odontologo), HttpStatus.CREATED);
-    }
-
-   // @PutMapping("/actualizar/{id}")
-    //public ResponseEntity<OdontologoSalidaDto> actualizarOdontologo(@RequestBody @Valid PacienteEntradaDto odontologo)
-    //{
-     //   return null;
-    //}
 
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminarOdontologo(@RequestParam Long id) {
+    public ResponseEntity<?> actualizarOdontologoPorId(@RequestParam Long id) {
         return new ResponseEntity<>("Odontólogo eliminado correctamente", HttpStatus.NO_CONTENT);
     }
 

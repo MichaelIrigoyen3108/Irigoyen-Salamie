@@ -26,24 +26,21 @@ public class TurnoController {
         public ResponseEntity<TurnoSalidaDto> registrarPaciente(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto) throws BadRequestException, ResourceNotFoundException {
             return new ResponseEntity<>(turnoService.registrarTurno(turnoEntradaDto), HttpStatus.CREATED);
         }
+        @GetMapping("/{id}")
+        public ResponseEntity<TurnoSalidaDto> buscarTurnoPorId(@PathVariable Long id) {
+        return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), HttpStatus.OK);
+        }
 
         @GetMapping()
         public ResponseEntity<List<TurnoSalidaDto>> listarTurnos() {
             return new ResponseEntity<>(turnoService.listarTurnos(), HttpStatus.OK);
         }
 
-        @GetMapping("/{id}")
-        public ResponseEntity<TurnoSalidaDto> buscarTurnoPorId(@PathVariable Long id) {
-            return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), HttpStatus.OK);
-        }
-
-       // @PutMapping("/actualizar/{id}")
+        // @PutMapping("/actualizar/{id}")
         //public ResponseEntity<TurnoSalidaDto> modificarTurno(@RequestBody @Valid TurnoEntradaDto turno, @PathVariable Long id) {
          //   TurnoSalidaDto turnoModificado = turnoService.modificarTurno(turno, id);
            // return new ResponseEntity<>(turnoModificado, HttpStatus.OK);
-       // }
-
-
+        //}
 
         @DeleteMapping("/eliminar")
         public ResponseEntity<?> eliminarTurno(@RequestParam Long id) throws ResourceNotFoundException {

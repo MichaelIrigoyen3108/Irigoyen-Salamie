@@ -1,6 +1,8 @@
 package com.backend.Odontologo.controller;
 
+import com.backend.Odontologo.dto.entrada.OdontologoEntradaDto;
 import com.backend.Odontologo.dto.entrada.PacienteEntradaDto;
+import com.backend.Odontologo.dto.salida.OdontologoSalidaDto;
 import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
 import com.backend.Odontologo.exceptions.ResourceNotFoundException;
 import com.backend.Odontologo.service.IPacienteService;
@@ -22,16 +24,8 @@ public class PacienteController {
         this.pacienteService = pacienteService;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<PacienteSalidaDto>> listarPacientes()
-    {
-        return new ResponseEntity<>(pacienteService.listarPacientes(), HttpStatus.OK);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<PacienteSalidaDto> buscarPacientePorId(@PathVariable Long id)
-    {
-        return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
-    }
+
+
 
     @PostMapping("/registrar")
     public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente)
@@ -39,11 +33,21 @@ public class PacienteController {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
 
-   // @PutMapping("/actualizar/{id}")
-    //public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente)
-    //{
-     //   return new ResponseEntity<>(pacienteService.)
-    //}
+    @GetMapping("/{id}")
+    public ResponseEntity<PacienteSalidaDto> buscarPacientePorId(@PathVariable Long id)
+    {
+        return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
+    }
+    @GetMapping()
+    public ResponseEntity<List<PacienteSalidaDto>> listarPacientes()
+    {
+        return new ResponseEntity<>(pacienteService.listarPacientes(), HttpStatus.OK);
+    }
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<PacienteSalidaDto> actualizarPacientePorId(@RequestBody @Valid PacienteEntradaDto pacienteEntradaDto, @PathVariable Long id)
+    {
+        return new ResponseEntity<>(pacienteService.actualizarPacientePorId(odontologoDto, id), HttpStatus.OK);
+    }
 
     @DeleteMapping("/eliminar")
     public ResponseEntity<?> eliminarPaciente(@RequestParam Long id) throws ResourceNotFoundException {

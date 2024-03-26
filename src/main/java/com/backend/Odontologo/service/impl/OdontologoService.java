@@ -9,7 +9,6 @@ import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
 import com.backend.Odontologo.entity.Odontologo;
 import com.backend.Odontologo.entity.Paciente;
 import com.backend.Odontologo.repository.OdontologoRepository;
-import com.backend.Odontologo.repository.PacienteRepository;
 import com.backend.Odontologo.service.IOdontologoService;
 import com.backend.Odontologo.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
@@ -18,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class OdontologoService implements IOdontologoService {
@@ -66,10 +67,36 @@ public class OdontologoService implements IOdontologoService {
 
         return odontologoEncontrado;
     }
+
+    @Override
+    public OdontologoSalidaDto actualizarOdontologoPorId(OdontologoEntradaDto odontologoDto, Long id) {
+        Optional<Odontologo> odontologoOptional = odontologoRepository.findById(id);
+
+        if (odontologoOptional.isPresent()) {
+            Odontologo odontologoExistente = odontologoOptional.get();
+            odontologoExistente.setNombre(odontologoDto.getNombre());
+            odontologoExistente.setApellido(odontologoDto.getApellido());
+
+            odontologoRepository.save(odontologoExistente);
+            return convertirAOutputDto(odontologoExistente);
+        } else {
+            throw new NoSuchElementException("El odontólogo con el ID " + id + " no existe.");
+        }
+    }
+    private OdontologoSalidaDto convertirAOutputDto(Odontologo odontologo) {
+        OdontologoSalidaDto salidaDto = new OdontologoSalidaDto();
+        salidaDto.setMatricula(odontologo.getMatricula());
+        salidaDto.setNombre(odontologo.getNombre());
+        salidaDto.setApellido(odontologo.getApellido());
+
+        return salidaDto;
+    }
+
     @Override
     public void eliminarOdontologoPorId(Long id) {
         odontologoRepository.deleteById(id);
     }
+
 
     private void configureMapping(){
         modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
