@@ -25,7 +25,7 @@ document.getElementById('formularioOdontologo').addEventListener('submit', funct
     .then(data => {
         alert('Odontólogo guardado exitosamente');
         console.log('Respuesta del servidor:', data);
-        // Puedes añadir más lógica aquí, como redireccionar a otra página
+
     })
     .catch(error => {
         console.error('Error:', error);

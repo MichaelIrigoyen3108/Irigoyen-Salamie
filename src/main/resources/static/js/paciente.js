@@ -42,19 +42,19 @@ document.getElementById('formularioPaciente').addEventListener('submit', functio
 
    document.addEventListener('DOMContentLoaded', function() {
        const listarBtn = document.getElementById('listar-btn');
-       listarBtn.addEventListener('click', fetchOdontologos);
+       listarBtn.addEventListener('click', fetchPacientes);
    });
 
-   function fetchOdontologos() {
-       fetch('/odontologos')
+   function fetchPacientes() {
+       fetch('/pacientes')
            .then(response => {
                if (!response.ok) {
-                   throw new Error('Error al cargar los odontólogos');
+                   throw new Error('Error al cargar los pacientes');
                }
                return response.json();
            })
            .then(data => {
-               displayOdontologos(data);
+               displayPacientes(data);
            })
            .catch(error => {
                console.error('Error:', error);
