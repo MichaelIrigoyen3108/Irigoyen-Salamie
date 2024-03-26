@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Registro de Turno</title>
 </head>
 <body>
+<h1>Registro de Turno</h1>
+<form id="formularioTurno">
+    <label for="pacienteId">ID del Paciente:</label>
+    <input type="number" id="pacienteId" name="pacienteId" required>
 
+    <label for="odontologoId">ID del Odontólogo:</label>
+    <input type="number" id="odontologoId" name="odontologoId" required>
+
+    <label for="fechaYHora">Fecha y Hora:</label>
+    <input type="datetime-local" id="fechaYHora" name="fechaYHora" required>
+
+    <button type="submit">Guardar Turno</button>
+</form>
+
+<script src="js/turno.js"></script>
 </body>
 </html>

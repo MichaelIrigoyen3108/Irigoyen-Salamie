@@ -34,7 +34,7 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws BadRequestException{
+    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws BadRequestException {
         TurnoSalidaDto turnoSalidaDto;
         PacienteSalidaDto paciente = pacienteService.buscarPacientePorId(turnoEntradaDto.getPacienteId());
         OdontologoSalidaDto odontologo = odontologoService.buscarOdontologoPorId(turnoEntradaDto.getOdontologoId());
@@ -43,8 +43,8 @@ public class TurnoService implements ITurnoService {
         String odontologoNoEnBdd = "El odontologo no se encuentra en nuestra base de datos";
         String ambosNulos = "El paciente y el odontologo no se encuentran en nuestra base de datos";
 
-        if(paciente == null || odontologo == null){
-            if(paciente == null && odontologo == null){
+        if (paciente == null || odontologo == null) {
+            if (paciente == null && odontologo == null) {
                 LOGGER.error(ambosNulos);
                 throw new BadRequestException(ambosNulos);
             } else if (paciente == null) {
@@ -55,7 +55,12 @@ public class TurnoService implements ITurnoService {
                 throw new BadRequestException(odontologoNoEnBdd);
             }
         } else {
-            Turno turnoNuevo = turnoRepository.save(modelMapper.map(turnoEntradaDto, Turno.class));
+            // Mapeo personalizado
+            Turno turnoNuevo = modelMapper.map(turnoEntradaDto, Turno.class);
+            turnoNuevo.getOdontologo().setId(turnoEntradaDto.getOdontologoId());
+            turnoNuevo.getPaciente().setId(turnoEntradaDto.getPacienteId());
+
+            turnoNuevo = turnoRepository.save(turnoNuevo);
             turnoSalidaDto = entidadADtoSalida(turnoNuevo, paciente, odontologo);
             LOGGER.info("Nuevo turno registrado con exito: {}", turnoSalidaDto);
         }
