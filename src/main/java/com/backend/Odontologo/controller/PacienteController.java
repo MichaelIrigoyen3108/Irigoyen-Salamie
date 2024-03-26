@@ -46,7 +46,7 @@ public class PacienteController {
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<PacienteSalidaDto> actualizarPacientePorId(@RequestBody @Valid PacienteEntradaDto pacienteEntradaDto, @PathVariable Long id)
     {
-        return new ResponseEntity<>(pacienteService.actualizarPacientePorId(odontologoDto, id), HttpStatus.OK);
+        return new ResponseEntity<>(pacienteService.actualizarPacientePorId(pacienteEntradaDto, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar")

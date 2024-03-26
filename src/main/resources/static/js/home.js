@@ -31,3 +31,37 @@ document.getElementById('formularioOdontologo').addEventListener('submit', funct
         console.error('Error:', error);
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const listarBtn = document.getElementById('listar-btn');
+    listarBtn.addEventListener('click', fetchOdontologos);
+});
+
+function fetchOdontologos() {
+    fetch('/odontologos')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar los odontólogos');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayOdontologos(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function displayOdontologos(odontologos) {
+    const odontologosList = document.getElementById('odontologos-list');
+    odontologosList.innerHTML = '';
+
+    odontologos.forEach(odontologo => {
+        const odontologoItem = document.createElement('li');
+        odontologoItem.textContent = `id: ${odontologo.id} -nNombre: ${odontologo.nombre} ${odontologo.apellido}`;
+        odontologosList.appendChild(odontologoItem);
+    });
+}
+
+

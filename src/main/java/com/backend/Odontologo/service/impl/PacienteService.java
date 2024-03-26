@@ -59,6 +59,12 @@ public class  PacienteService implements IPacienteService {
 
         return pacienteEncontrado;
     }
+
+    @Override
+    public PacienteSalidaDto actualizarPacientePorId(PacienteEntradaDto pacienteEntradaDto, Long Id) {
+        return null;
+    }
+
     @Override
     public void eliminarPaciente(Long id) {
         pacienteRepository.deleteById(id);
