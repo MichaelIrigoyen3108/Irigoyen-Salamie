@@ -25,7 +25,8 @@ public class TurnoService implements ITurnoService {
 
     private final PacienteService pacienteService;
     private final OdontologoService odontologoService;
-    public TurnoService(TurnoRepository turnoRepository, ModelMapper modelMapper, PacienteService pacienteService, OdontologoService odontologoService) {
+    public TurnoService(TurnoRepository turnoRepository, ModelMapper modelMapper,
+                        PacienteService pacienteService, OdontologoService odontologoService) {
         this.turnoRepository = turnoRepository;
         this.modelMapper = modelMapper;
         this.pacienteService = pacienteService;
@@ -55,7 +56,6 @@ public class TurnoService implements ITurnoService {
                 throw new BadRequestException(odontologoNoEnBdd);
             }
         } else {
-            // Mapeo personalizado
             Turno turnoNuevo = modelMapper.map(turnoEntradaDto, Turno.class);
             turnoNuevo.getOdontologo().setId(turnoEntradaDto.getOdontologoId());
             turnoNuevo.getPaciente().setId(turnoEntradaDto.getPacienteId());
