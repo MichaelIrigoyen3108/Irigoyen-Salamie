@@ -49,8 +49,8 @@ public class PacienteController {
         return new ResponseEntity<>(pacienteService.actualizarPacientePorId(pacienteEntradaDto, id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminarPaciente(@RequestParam Long id) throws ResourceNotFoundException {
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarPaciente(@PathVariable Long id) throws ResourceNotFoundException {
         pacienteService.eliminarPaciente(id);
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
     }

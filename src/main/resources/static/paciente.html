@@ -5,7 +5,10 @@
     <title>Paciente</title>
 </head>
 <body>
-<h1>Registro de Paciente</h1>
+
+
+<p>Registro de Paciente</p>
+
 <form id="formularioPaciente">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required>
@@ -35,5 +38,51 @@
 
     <script src="js/paciente.js" ></script>
 </form>
+
+<p>Listar todos pacientes</p>
+<button id="listar-btn">Listar todos los pacientes</button>
+<ul id="pacientes-list"></ul>
+
+<p>Buscar Paciente por ID</p>
+<form id="formularioBuscarPaciente">
+    <label for="pacienteId">ID del Paciente:</label>
+    <input type="number" id="pacienteId" name="pacienteId" required>
+    <button type="submit">Buscar</button>
+    <div id="datosPaciente"></div>
+</form>
+
+<p>Actualizar datos del paciente</p>
+<form id="formularioActualizarPaciente">
+    <label for="pacienteActualizarId">ID del Paciente:</label>
+    <input type="number" id="pacienteActualizarId" name="pacienteActualizarId" required>
+    <label for="nombreActualizar">Nombre:</label>
+    <input type="text" id="nombreActualizar" name="nombreActualizar" required>
+    <label for="apellidoActualizar">Apellido:</label>
+    <input type="text" id="apellidoActualizar" name="apellidoActualizar" required>
+    <label for="dniActualizar">DNI:</label>
+    <input type="number" id="dniActualizar" name="dniActualizar" required>
+    <label for="fechaIngresoActualizar">Fecha de Ingreso:</label>
+    <input type="date" id="fechaIngresoActualizar" name="fechaIngresoActualizar" required>
+    <label for="calleActualizar">Calle:</label>
+    <input type="text" id="calleActualizar" name="calleActualizar" required>
+    <label for="numeroActualizar">Número:</label>
+    <input type="number" id="numeroActualizar" name="numeroActualizar" required>
+    <label for="localidadActualizar">Localidad:</label>
+    <input type="text" id="localidadActualizar" name="localidadActualizar" required>
+    <label for="provinciaActualizar">Provincia:</label>
+    <input type="text" id="provinciaActualizar" name="provinciaActualizar" required>
+
+    <button type="submit">Actualizar Paciente</button>
+</form>
+
+<p>Eliminar Paciente por Id</p>
+<form id="formularioEliminarPaciente">
+    <label for="pacienteEliminarId">ID del Paciente a eliminar:</label>
+    <input type="number" id="pacienteEliminarId" name="pacienteEliminarId" required>
+    <button type="submit">Eliminar</button>
+</form>
+
+
+
 </body>
 </html>
