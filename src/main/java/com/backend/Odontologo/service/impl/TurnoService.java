@@ -4,6 +4,8 @@ import com.backend.Odontologo.dto.entrada.TurnoEntradaDto;
 import com.backend.Odontologo.dto.salida.OdontologoSalidaDto;
 import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
 import com.backend.Odontologo.dto.salida.TurnoSalidaDto;
+import com.backend.Odontologo.entity.Odontologo;
+import com.backend.Odontologo.entity.Paciente;
 import com.backend.Odontologo.entity.Turno;
 import com.backend.Odontologo.exceptions.BadRequestException;
 import com.backend.Odontologo.exceptions.ResourceNotFoundException;
@@ -56,10 +58,7 @@ public class TurnoService implements ITurnoService {
                 throw new BadRequestException(odontologoNoEnBdd);
             }
         } else {
-            Turno turnoNuevo = modelMapper.map(turnoEntradaDto, Turno.class);
-            turnoNuevo.getOdontologo().setId(turnoEntradaDto.getOdontologoId());
-            turnoNuevo.getPaciente().setId(turnoEntradaDto.getPacienteId());
-
+            Turno turnoNuevo = new Turno(modelMapper.map(odontologo, Odontologo.class),modelMapper.map(paciente, Paciente.class), turnoEntradaDto.getFechaYHora());
             turnoNuevo = turnoRepository.save(turnoNuevo);
             turnoSalidaDto = entidadADtoSalida(turnoNuevo, paciente, odontologo);
             LOGGER.info("Nuevo turno registrado con exito: {}", turnoSalidaDto);

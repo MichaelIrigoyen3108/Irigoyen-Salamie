@@ -46,8 +46,9 @@ public class OdontologoController {
         return new ResponseEntity<>(odontologoService.actualizarOdontologoPorId(odontologoDto, id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/eliminar")
-    public ResponseEntity<?> actualizarOdontologoPorId(@RequestParam Long id) {
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarOdontologoPorId(@PathVariable Long id) {
+        odontologoService.eliminarOdontologoPorId(id);
         return new ResponseEntity<>("Odontólogo eliminado correctamente", HttpStatus.NO_CONTENT);
     }
 
