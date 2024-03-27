@@ -1,4 +1,5 @@
 
+
 document.getElementById('formularioOdontologo').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -88,7 +89,11 @@ function buscarOdontologoPorId(id) {
     fetch(`http://localhost:8080/odontologos/${id}`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Odontólogo no encontrado');
+                if (response.status === 404) {
+                    throw new Error('El ID del odontólogo no existe');
+                } else {
+                    throw new Error('Error al buscar el odontólogo');
+                }
             }
             return response.json();
         })
@@ -97,22 +102,37 @@ function buscarOdontologoPorId(id) {
         })
         .catch(error => {
             console.error('Error:', error);
+            mostrarError(error.message); // Mostrar el mensaje de error en caso de problemas con la solicitud
         });
 }
 
 function mostrarDatosOdontologo(odontologo) {
     const datosOdontologo = document.getElementById('datosOdontologo');
     datosOdontologo.innerHTML = '';
-    const nombre = document.createElement('p');
-    nombre.textContent = `Nombre: ${odontologo.nombre}`;
-    datosOdontologo.appendChild(nombre);
 
-    const apellido = document.createElement('p');
-    apellido.textContent = `Apellido: ${odontologo.apellido}`;
-    datosOdontologo.appendChild(apellido);
+    if (odontologo) {
+        const nombre = document.createElement('p');
+        nombre.textContent = `Nombre: ${odontologo.nombre}`;
+        datosOdontologo.appendChild(nombre);
 
-
+        const apellido = document.createElement('p');
+        apellido.textContent = `Apellido: ${odontologo.apellido}`;
+        datosOdontologo.appendChild(apellido);
+    } else {
+        mostrarError('Odontólogo no encontrado');
+    }
 }
+
+function mostrarError(mensaje) {
+    const datosOdontologo = document.getElementById('datosOdontologo');
+    datosOdontologo.innerHTML = '';
+
+    const mensajeError = document.createElement('p');
+    mensajeError.textContent = mensaje;
+    datosOdontologo.appendChild(mensajeError);
+}
+
+
 
 
 
@@ -140,7 +160,6 @@ function eliminarOdontologoPorId(id) {
     .then(data => {
         alert('Odontólogo eliminado correctamente');
         console.log(data);
-        buscarOdontologoPorId(id);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -148,3 +167,48 @@ function eliminarOdontologoPorId(id) {
 }
 
 
+
+
+
+
+
+
+
+
+document.getElementById('formularioActualizarOdontologo').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const odontologoId = formData.get('odontologoActualizarId');
+    const odontologo = {
+        matricula: formData.get('matriculaActualizar'),
+        nombre: formData.get('nombreActualizar'),
+        apellido: formData.get('apellidoActualizar')
+    };
+
+    actualizarOdontologoPorId(odontologoId, odontologo);
+});
+
+function actualizarOdontologoPorId(id, odontologo) {
+    fetch(`http://localhost:8080/odontologos/actualizar/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(odontologo)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al actualizar el odontólogo.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert('Odontólogo actualizado correctamente');
+        console.log('Respuesta del servidor:', data);
+
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
