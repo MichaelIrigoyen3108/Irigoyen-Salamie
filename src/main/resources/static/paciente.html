@@ -6,33 +6,32 @@
 </head>
 <body>
 
-
 <p>Registro de Paciente</p>
 
 <form id="formularioPaciente">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required><br>
 
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" name="apellido" required>
+    <label for="apellido">Apellido:</label><br>
+    <input type="text" id="apellido" name="apellido" required><br>
 
-    <label for="dni">DNI:</label>
-    <input type="number" id="dni" name="dni" required min="0">
+    <label for="dni">DNI:</label><br>
+    <input type="number" id="dni" name="dni" required min="0"><br>
 
-    <label for="fechaIngreso">Fecha de Ingreso:</label>
+    <label for="fechaIngreso">Fecha de Ingreso:</label><br>
     <input type="date" id="fechaIngreso" name="fechaIngreso" required><br>
 
-    <label for="calle">Calle:</label>
-    <input type="text" id="calle" name="calle" required>
+    <label for="calle">Calle:</label><br>
+    <input type="text" id="calle" name="calle" required><br>
 
-    <label for="numero">Número:</label>
-    <input type="number" id="numero" name="numero" required min="0">
+    <label for="numero">Número:</label><br>
+    <input type="number" id="numero" name="numero" required min="0"><br>
 
-    <label for="localidad">Localidad:</label>
-    <input type="text" id="localidad" name="localidad" required>
+    <label for="localidad">Localidad:</label><br>
+    <input type="text" id="localidad" name="localidad" required><br>
 
-    <label for="provincia">Provincia:</label>
-    <input type="text" id="provincia" name="provincia" required>
+    <label for="provincia">Provincia:</label><br>
+    <input type="text" id="provincia" name="provincia" required><br>
 
     <button type="submit">Guardar Paciente</button>
 
@@ -45,44 +44,50 @@
 
 <p>Buscar Paciente por ID</p>
 <form id="formularioBuscarPaciente">
-    <label for="pacienteId">ID del Paciente:</label>
-    <input type="number" id="pacienteId" name="pacienteId" required>
+    <label for="pacienteId">ID del Paciente:</label><br>
+    <input type="number" id="pacienteId" name="pacienteId" required><br>
     <button type="submit">Buscar</button>
     <div id="datosPaciente"></div>
 </form>
 
 <p>Actualizar datos del paciente</p>
 <form id="formularioActualizarPaciente">
-    <label for="pacienteActualizarId">ID del Paciente:</label>
-    <input type="number" id="pacienteActualizarId" name="pacienteActualizarId" required>
-    <label for="nombreActualizar">Nombre:</label>
-    <input type="text" id="nombreActualizar" name="nombreActualizar" required>
-    <label for="apellidoActualizar">Apellido:</label>
-    <input type="text" id="apellidoActualizar" name="apellidoActualizar" required>
-    <label for="dniActualizar">DNI:</label>
-    <input type="number" id="dniActualizar" name="dniActualizar" required>
-    <label for="fechaIngresoActualizar">Fecha de Ingreso:</label>
-    <input type="date" id="fechaIngresoActualizar" name="fechaIngresoActualizar" required>
-    <label for="calleActualizar">Calle:</label>
-    <input type="text" id="calleActualizar" name="calleActualizar" required>
-    <label for="numeroActualizar">Número:</label>
-    <input type="number" id="numeroActualizar" name="numeroActualizar" required>
-    <label for="localidadActualizar">Localidad:</label>
-    <input type="text" id="localidadActualizar" name="localidadActualizar" required>
-    <label for="provinciaActualizar">Provincia:</label>
-    <input type="text" id="provinciaActualizar" name="provinciaActualizar" required>
+    <label for="pacienteActualizarId">ID del Paciente:</label><br>
+    <input type="number" id="pacienteActualizarId" name="pacienteActualizarId" required><br>
+
+    <label for="nombreActualizar">Nombre:</label><br>
+    <input type="text" id="nombreActualizar" name="nombreActualizar" required><br>
+
+    <label for="apellidoActualizar">Apellido:</label><br>
+    <input type="text" id="apellidoActualizar" name="apellidoActualizar" required><br>
+
+    <label for="dniActualizar">DNI:</label><br>
+    <input type="number" id="dniActualizar" name="dniActualizar" required><br>
+
+    <label for="fechaIngresoActualizar">Fecha de Ingreso:</label><br>
+    <input type="date" id="fechaIngresoActualizar" name="fechaIngresoActualizar" required><br>
+
+    <label for="calleActualizar">Calle:</label><br>
+    <input type="text" id="calleActualizar" name="calleActualizar" required><br>
+
+    <label for="numeroActualizar">Número:</label><br>
+    <input type="number" id="numeroActualizar" name="numeroActualizar" required><br>
+
+    <label for="localidadActualizar">Localidad:</label><br>
+    <input type="text" id="localidadActualizar" name="localidadActualizar" required><br>
+
+    <label for="provinciaActualizar">Provincia:</label><br>
+    <input type="text" id="provinciaActualizar" name="provinciaActualizar" required><br>
 
     <button type="submit">Actualizar Paciente</button>
 </form>
 
 <p>Eliminar Paciente por Id</p>
 <form id="formularioEliminarPaciente">
-    <label for="pacienteEliminarId">ID del Paciente a eliminar:</label>
-    <input type="number" id="pacienteEliminarId" name="pacienteEliminarId" required>
+    <label for="pacienteEliminarId">ID del Paciente a eliminar:</label><br>
+    <input type="number" id="pacienteEliminarId" name="pacienteEliminarId" required><br>
     <button type="submit">Eliminar</button>
 </form>
-
-
 
 </body>
 </html>

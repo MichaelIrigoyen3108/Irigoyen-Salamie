@@ -175,46 +175,49 @@ function eliminarPacientePorId(id) {
 
 
 
+
 document.getElementById('formularioActualizarPaciente').addEventListener('submit', function(event) {
-    event.preventDefault();
+ event.preventDefault();
 
-    const formData = new FormData(this);
-    const pacienteId = formData.get('pacienteActualizarId');
-    const paciente = {
-        nombre: formData.get('nombreActualizar'),
-        apellido: formData.get('apellidoActualizar'),
-        dni: formData.get('dniActualizar'),
-        fechaIngreso: formData.get('fechaIngresoActualizar'),
-        domicilioEntradaDto: {
-            calle: formData.get('calleActualizar'),
-            numero: formData.get('numeroActualizar'),
-            localidad: formData.get('localidadActualizar'),
-            provincia: formData.get('provinciaActualizar')
-        }
-    };
+        const formData = new FormData(this);
+        const pacienteId = formData.get('pacienteActualizarId');
+        const paciente = {
+            nombre: formData.get('nombreActualizar'),
+            apellido: formData.get('apellidoActualizar'),
+            dni: formData.get('dniActualizar'),
+            fechaIngreso: formData.get('fechaIngresoActualizar'),
+            domicilioEntradaDto: {
+                calle: formData.get('calleActualizar'),
+                numero: formData.get('numeroActualizar'),
+                localidad: formData.get('localidadActualizar'),
+                provincia: formData.get('provinciaActualizar')
+            }
+        };
 
-    actualizarPacientePorId(pacienteId, paciente);
+        actualizarPacientePorId(pacienteId, paciente);
+    });
+
+    function actualizarPacientePorId(id, paciente) {
+        fetch(`http://localhost:8080/pacientes/actualizar/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(paciente)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al actualizar el paciente.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('Paciente actualizado correctamente');
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 });
 
-function actualizarPacientePorId(id, paciente) {
-    fetch(`http://localhost:8080/pacientes/actualizar/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(paciente)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al actualizar el paciente.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        alert('Paciente actualizado correctamente');
-        console.log('Respuesta del servidor:', data);
-    })
-   .catch(error => {
-           console.error('Error:', error);
-       });
-   }
