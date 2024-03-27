@@ -1,6 +1,7 @@
 package com.backend.Odontologo.service.impl;
 
 import com.backend.Odontologo.dto.entrada.PacienteEntradaDto;
+import com.backend.Odontologo.dto.salida.DomicilioSalidaDto;
 import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
 import com.backend.Odontologo.entity.Paciente;
 import com.backend.Odontologo.repository.PacienteRepository;
@@ -11,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class  PacienteService implements IPacienteService {
@@ -61,8 +64,46 @@ public class  PacienteService implements IPacienteService {
     }
 
     @Override
-    public PacienteSalidaDto actualizarPacientePorId(PacienteEntradaDto pacienteEntradaDto, Long Id) {
-        return null;
+    public PacienteSalidaDto actualizarPacientePorId(PacienteEntradaDto pacienteEntradaDto, Long id) {
+        Optional<Paciente> pacienteOptional = pacienteRepository.findById(id);
+
+        if (pacienteOptional.isPresent()) {
+            Paciente pacienteExistente = pacienteOptional.get();
+            pacienteExistente.setNombre(pacienteEntradaDto.getNombre());
+            pacienteExistente.setApellido(pacienteEntradaDto.getApellido());
+
+
+            pacienteExistente.getDomicilio().setCalle(pacienteEntradaDto.getDomicilioEntradaDto().getCalle());
+            pacienteExistente.getDomicilio().setNumero(pacienteEntradaDto.getDomicilioEntradaDto().getNumero());
+            pacienteExistente.getDomicilio().setLocalidad(pacienteEntradaDto.getDomicilioEntradaDto().getLocalidad());
+            pacienteExistente.getDomicilio().setProvincia(pacienteEntradaDto.getDomicilioEntradaDto().getProvincia());
+
+            pacienteRepository.save(pacienteExistente);
+            return convertirAOutputDto(pacienteExistente);
+        } else {
+            throw new NoSuchElementException("El paciente con el ID " + id + " no existe.");
+        }
+    }
+
+
+    private PacienteSalidaDto convertirAOutputDto(Paciente paciente) {
+        PacienteSalidaDto salidaPacienteDto = new PacienteSalidaDto();
+        salidaPacienteDto.setNombre(paciente.getNombre());
+        salidaPacienteDto.setApellido(paciente.getApellido());
+        salidaPacienteDto.setDni(paciente.getDni());
+        salidaPacienteDto.setFechaIngreso(paciente.getFechaIngreso());
+
+
+        DomicilioSalidaDto domicilioSalidaDto = new DomicilioSalidaDto();
+        domicilioSalidaDto.setCalle(paciente.getDomicilio().getCalle());
+        domicilioSalidaDto.setNumero(paciente.getDomicilio().getNumero());
+        domicilioSalidaDto.setLocalidad(paciente.getDomicilio().getLocalidad());
+        domicilioSalidaDto.setProvincia(paciente.getDomicilio().getProvincia());
+
+
+        salidaPacienteDto.setDomicilioSalidaDto(domicilioSalidaDto);
+
+        return salidaPacienteDto;
     }
 
     @Override
