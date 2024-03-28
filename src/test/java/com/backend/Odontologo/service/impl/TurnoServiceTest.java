@@ -6,6 +6,7 @@ import com.backend.Odontologo.dto.salida.PacienteSalidaDto;
 import com.backend.Odontologo.dto.salida.TurnoSalidaDto;
 import com.backend.Odontologo.entity.Turno;
 import com.backend.Odontologo.exceptions.BadRequestException;
+import com.backend.Odontologo.exceptions.ResourceNotFoundException;
 import com.backend.Odontologo.repository.TurnoRepository;
 import org.junit.jupiter.api.*;
 import org.modelmapper.ModelMapper;
@@ -28,7 +29,7 @@ class TurnoServiceTest {
 
     @Test
     @Order(1)
-    void deberiaRegistrarTurno() throws BadRequestException {
+    void deberiaRegistrarTurno() throws BadRequestException, ResourceNotFoundException {
         // Arrange
         TurnoService turnoService = new TurnoService(turnoRepository, modelMapper, pacienteService, odontologoService);
         TurnoEntradaDto turnoEntradaDto = new TurnoEntradaDto(1L, 1L, LocalDateTime.now());

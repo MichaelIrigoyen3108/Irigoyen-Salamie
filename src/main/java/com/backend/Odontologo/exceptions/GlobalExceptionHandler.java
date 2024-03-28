@@ -18,7 +18,15 @@ public class GlobalExceptionHandler {
         mensaje.put("mensaje", "Recurso no encontrado: " + resourceNotFoundException.getMessage());
         return mensaje;
     }
-//tenemos que programar el manejo global de la badRequest
+
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> manejarBadRequest(BadRequestException badRequestException){
+        Map<String, String> mensaje = new HashMap<>();
+        mensaje.put("mensaje", "Solicitud incorrecta: " + badRequestException.getMessage());
+        return mensaje;
+    }
 
 
 
